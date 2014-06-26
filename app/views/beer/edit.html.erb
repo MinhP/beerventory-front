@@ -10,7 +10,7 @@
                   <th class="col-md-1">Actions</th>
                 </tr>
             </thead>
-        <% @beerlist.each do |beer| %>
+        <% @beer.each do |beer| %>
             <tr>
                 <td><%= beer[:name] %></td>
                 <td><%= beer[:type] %></td>
@@ -30,7 +30,7 @@
                 <td></td>
                 <td>
                     <div class="nav navbar-right">
-                        <a href="#" class="btn btn-primary">Add Beer</a></td>
+                        <a href="#" class="btn btn-primary">Edit Beer</a></td>
                     </div>
             </tr>
         </table>
