@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Qty</th>
+                  <th>UPC</th>
+                  <th>Actions</th>
+                </tr>
+            </thead>
+        <% @beerlist.each do |beer| %>
+            <tr>
+                <td><%= beer[:name] %></td>
+                <td><%= beer[:type] %></td>
+                <td><%= beer[:qty] %></td>
+                <td><%= beer[:upc] %></td>
+                <td>Edit</td>
+            </tr>
+        <% end %>
+        </table>
+    </div>
+</div>
