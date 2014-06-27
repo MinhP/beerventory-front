@@ -5,11 +5,7 @@ class BeerController < ApplicationController
   end
 
   def edit
-    if params[:id] == "1"
-        @beer = {'upc' => "123123", 'name' => "not a bier", 'qty' => 5, 'type' => "Cider"}
-    else
-        @beer = {'upc' => "123123", 'name' => "a bier", 'qty' => 5, 'type' => "IPA"}
-    end
+    @beer = JSON.parse(get_beer(params[:id]).downcase)
   end
 
   def update
@@ -60,15 +56,15 @@ class BeerController < ApplicationController
         begin
             uri = URI.parse(URI::escape("#{Rails.configuration.beer.endpoint}/beer/#{id}"))
             request = Net::HTTP::Get.new(uri.request_uri, headers)
-            request.body = entry
-            Net::HTTP.new(uri.host,uri.port).start{|http| http.request(request)}
+            request.body = nil
+            response = Net::HTTP.new(uri.host,uri.port).start{|http| http.request(request)}
+            response.body
         rescue Exception => e
             puts e
         end
     end
 
     def add_beer(beer = nil)
-        puts "add beer"
         entry = beer.to_json
 
         begin
@@ -83,14 +79,13 @@ class BeerController < ApplicationController
     end    
 
     def update_beer(beer = nil)
-        puts "update beer"
         entry = beer.to_json
 
         begin
             uri = URI.parse(URI::escape("#{Rails.configuration.beer.endpoint}/beer/#{beer['upc']}"))
             headers={'content-type'=>'applications/json'}
             request = Net::HTTP::Put.new(uri.request_uri, headers)
-            request.body = beer
+            request.body = entry
             Net::HTTP.new(uri.host,uri.port).start{|http| http.request(request)}
         rescue Exception => e
             puts e
