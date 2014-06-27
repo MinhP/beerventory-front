@@ -4,19 +4,23 @@
         <form role="form" action="/beer" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Beer Name">
+                <input type="text" class="form-control" name="name" id="name" placeholder="Beer Name">
             </div>
             <div class="form-group">
                 <label for="type">Type</label>
-                <input type="text" class="form-control" id="type" placeholder="IPA">
+                <select class="form-control" name="type" id="type">
+                    <% @beer_types.each do |beer_type| %>
+                    <option value="<%= beer_type.first %>"><%= beer_type.last %></option>
+                    <% end %>
+                </select>
             </div>
             <div class="form-group">
                 <label for="qty">Quantity</label>
-                <input type="number" class="form-control" id="qty" placeholder="1">
+                <input type="number" class="form-control" name="qty" id="qty" placeholder="1">
             </div>
             <div class="form-group">
                 <label for="upc">UPC</label>
-                <input type="text" class="form-control" id="upc" placeholder="0000000000000">
+                <input type="text" class="form-control" name="upc" id="upc" placeholder="0000000000000">
             </div>
             <input type="submit" class="btn btn-primary" value="Add Beer">
         </form>
