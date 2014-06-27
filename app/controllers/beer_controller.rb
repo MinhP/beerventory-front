@@ -9,7 +9,7 @@ class BeerController < ApplicationController
   end
 
   def show
-    @beerlist = JSON.parse(get_beer_list.downcase)
+    @beerlist = JSON.parse(get_beer_list)
     p @beerlist
     @beer_types = @@beer_types
     
