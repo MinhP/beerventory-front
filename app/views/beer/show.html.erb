@@ -12,13 +12,13 @@
             </thead>
         <% @beerlist.each do |beer| %>
             <tr>
-                <td><%= beer[:name] %></td>
-                <td><%= beer[:type] %></td>
-                <td><%= beer[:qty] %></td>
-                <td><%= beer[:upc] %></td>
+                <td><%= beer['name'] %></td>
+                <td><%= beer['type'] %></td>
+                <td><%= beer['qty'] %></td>
+                <td><%= beer['upc'] %></td>
                 <td class="col-md-1">
                     <div class="nav navbar-right">
-                        <a href="/edit/<%= beer[:upc] %>" class="btn btn-primary">Edit</a>
+                        <%= link_to "Edit", edit_beer_path(beer['upc'].to_i), 'class' => "btn btn-primary" %>
                     </div>
                 </td>
             </tr>
@@ -30,8 +30,9 @@
                 <td></td>
                 <td>
                     <div class="nav navbar-right">
-                        <a href="#" class="btn btn-primary">Add Beer</a></td>
+                        <%= link_to "Add Beer", new_beer_path, 'class' => "btn btn-primary" %>
                     </div>
+                </td>
             </tr>
         </table>
     </div>
